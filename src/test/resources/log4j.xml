@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="CONSOLE_ALL" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} [%t][%-5p][%l]: %m %x %n" />
+		</layout>
+	</appender>
+
+	<appender name="ERROR_FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="./error.log" />
+		<param name="Append" value="false" />
+		<param name="MaxFileSize" value="200MB" />
+		<param name="MaxBackupIndex" value="100" />
+		<param name="Append" value="false" />
+		<!-- <param name="DatePattern" value="'.'yyyy-MM-dd" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%-5p]: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+	<appender name="ERROR_ROLLING_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="./error.log" />
+		<param name="Append" value="false" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%-5p]: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+	<appender name="ROLLING_FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="./all.log" />
+		<param name="MaxFileSize" value="200MB" />
+		<param name="MaxBackupIndex" value="100" />
+		<param name="Append" value="false" />
+		<!-- <param name="Threshhold" value="INFO" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%-5p]: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="INFO" />
+		</filter>
+	</appender>
+
+	<appender name="DAILY_ROLLING_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="./all.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH.log" />
+		<!-- <param name="Threshhold" value="INFO" /> -->
+		<!-- <param name="Append" value="true" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%-5p]: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="INFO" />
+		</filter>
+	</appender>
+
+
+
+	<logger name="org.apache">
+		<level value="INFO" />
+	</logger>
+
+	<root>
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE_ALL" />
+		<appender-ref ref="ROLLING_FILE" />
+		<!-- <appender-ref ref="DAILY_ROLLING_FILE" /><appender-ref ref="ERROR_ROLLING_FILE" 
+			/> -->
+
+	</root>
+
+</log4j:configuration>
